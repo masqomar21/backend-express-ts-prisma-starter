@@ -1,0 +1,39 @@
+@hostname = http://localhost:5000/api/v1
+
+### Test connection
+GET {{hostname}}
+
+### Register Seeder
+POST {{hostname}}/auth/register
+Content-Type: application/json
+
+{
+    "email": "test@test.com",
+    "password": "123456",
+    "username" : "test"
+}
+
+### Login
+POST {{hostname}}/auth/login?device=android
+Content-Type: application/json
+
+{
+    "email": "test@test.com",
+    "password": "123456"
+}
+
+### Logout
+DELETE {{hostname}}/auth/logout
+
+### otp
+POST {{hostname}}/auth/otp
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk5ZTZhNDMyLWU3ZjAtNGQwZS05MWIxLWZhZjk1MWJmNjFjOSIsImlhdCI6MTcwNTI0MDcyNywiZXhwIjoxNzA1MzI3MTI3fQ.BcXhPNYwDhjN5RZKI_ZVKmlz0IcMvr5VlxaVEZ0FLeM",
+    "otp": "557480",
+    "device": "android"
+}
+
+### resend otp
+GET {{hostname}}/auth/resendotp?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk5ZTZhNDMyLWU3ZjAtNGQwZS05MWIxLWZhZjk1MWJmNjFjOSIsImlhdCI6MTcwNTI0MDcyNywiZXhwIjoxNzA1MzI3MTI3fQ.BcXhPNYwDhjN5RZKI_ZVKmlz0IcMvr5VlxaVEZ0FLeM

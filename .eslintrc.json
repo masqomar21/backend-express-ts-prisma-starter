@@ -1,0 +1,18 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": "standard-with-typescript",
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "rules": {
+        "indent" : "off",
+        "@typescript-eslint/indent": "error",
+        "space-before-function-paren" : "off",
+        "@typescript-eslint/space-before-function-paren": "error",
+        "@typescript-eslint/no-misused-promises": "off",
+        "@typescript-eslint/non-nullable-type-assertion-style" : "off"
+    }
+}
