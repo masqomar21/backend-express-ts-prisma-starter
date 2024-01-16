@@ -7,9 +7,11 @@ import nodemailer from 'nodemailer'
 import { CONFIG } from '../config'
 import { CONSOLE } from '../utilities'
 
-const mailHost = CONFIG.smtp.host! ?? 'smtp.gmail.com'
-const mailPort = parseInt(CONFIG.smtp.port! ?? '465')
+const mailHost = CONFIG.smtp.host
+const mailPort = parseInt(CONFIG.smtp.port)
 const isSecure = CONFIG.smtp.host === 'smtp.gmail.com'
+
+console.log('mailHost', mailHost, 'mailPort', mailPort, 'isSecure', isSecure)
 
 export interface MailInterface {
   from?: string
@@ -27,7 +29,7 @@ export default class MailSevice {
   private readonly transporter: nodemailer.Transporter = nodemailer.createTransport({
     host: mailHost,
     port: mailPort,
-    secure: isSecure,
+    // secure: isSecure,
     auth: {
       user: CONFIG.smtp.email,
       pass: CONFIG.smtp.password

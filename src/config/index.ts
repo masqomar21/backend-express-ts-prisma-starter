@@ -50,11 +50,11 @@ export const CONFIG = {
     }
   },
   smtp: {
-    sender : process.env.SMTP_SENDER || 'no-reply',
-    host: process.env.VERIFICATION_HOST,
-    port: process.env.VERIFICATION_PORT,
-    email: process.env.VERIFICATION_EMIAL,
-    password: process.env.VERIFICATION_EMIAL_PASSWORD
+    sender : process.env.SMTP_SENDER || 'no-reply@test.com',
+    host: process.env.VERIFICATION_HOST || 'smtp.ethereal.email',
+    port: process.env.VERIFICATION_PORT || '587',
+    email: process.env.VERIFICATION_EMIAL || 'alda.hilpert@ethereal.email',
+    password: process.env.VERIFICATION_EMIAL_PASSWORD || 'aSBRhVyCmHnVUXGtaR'
   }
 }
   

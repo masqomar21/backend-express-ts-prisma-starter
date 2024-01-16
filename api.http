@@ -30,10 +30,14 @@ POST {{hostname}}/auth/otp
 Content-Type: application/json
 
 {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk5ZTZhNDMyLWU3ZjAtNGQwZS05MWIxLWZhZjk1MWJmNjFjOSIsImlhdCI6MTcwNTI0MDcyNywiZXhwIjoxNzA1MzI3MTI3fQ.BcXhPNYwDhjN5RZKI_ZVKmlz0IcMvr5VlxaVEZ0FLeM",
-    "otp": "557480",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZmVlNThmLTY3OTgtNDBjNi1hZjYwLWFlZTk2Y2QxNzEwOSIsImlhdCI6MTcwNTM4MTc3NCwiZXhwIjoxNzA1NDY4MTc0fQ.sTRpV2YMsqE5ZTkEnfJB22NUz1PUiEsdfFfqhob6pYM",
+    "otp": "745682",
     "device": "android"
 }
 
 ### resend otp
-GET {{hostname}}/auth/resendotp?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk5ZTZhNDMyLWU3ZjAtNGQwZS05MWIxLWZhZjk1MWJmNjFjOSIsImlhdCI6MTcwNTI0MDcyNywiZXhwIjoxNzA1MzI3MTI3fQ.BcXhPNYwDhjN5RZKI_ZVKmlz0IcMvr5VlxaVEZ0FLeM
+GET {{hostname}}/auth/resendotp?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZmVlNThmLTY3OTgtNDBjNi1hZjYwLWFlZTk2Y2QxNzEwOSIsImlhdCI6MTcwNTM4MTc3NCwiZXhwIjoxNzA1NDY4MTc0fQ.sTRpV2YMsqE5ZTkEnfJB22NUz1PUiEsdfFfqhob6pYM
+
+
+### test auth
+GET {{hostname}}/test_auth

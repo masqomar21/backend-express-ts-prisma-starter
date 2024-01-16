@@ -52,7 +52,6 @@ export const loginComtroller = async function (req: any, res: Response): Promise
         userAccountId: result.id
       }
     })
-    console.log('deviceLogin', deviceLogin)
     if (deviceLogin !== null) {
       const newToken = generateAccesToken(result.id, CONFIG.secret.secreReferstToken as string, '3d')
       await prisma.userAccess.create({

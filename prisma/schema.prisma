@@ -11,10 +11,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  USER @map("user")
+  ADMIN @map("admin")
+}
+
 model UsersAccount {
   id         String       @id @default(dbgenerated("uuid()")) @map("id") @db.VarChar(36)
   username   String       @map("user_name")
   email      String       @unique
+  role       Role         @default(USER) @map("role")
   password   String
   createdAt  DateTime     @default(now()) @map("created_at")
   updatedAt  DateTime?    @updatedAt @map("updated_at")
@@ -25,6 +31,7 @@ model UsersAccount {
 
   @@map("users_account")
 }
+
 
 model UserAccess {
   id            Int          @id @default(autoincrement()) @map("id")

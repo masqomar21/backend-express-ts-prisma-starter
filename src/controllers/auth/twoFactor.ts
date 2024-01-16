@@ -23,7 +23,6 @@ export const verifyOTPController = async function (req: any, res: Response): Pro
   try {
     const user = verifyAccesToken(requestBody.token, CONFIG.secret.secretOTP as string)
 
-    console.log('userId', user)
     const result = await prisma.otp.findFirst({
       where: {
         otp: requestBody.otp,

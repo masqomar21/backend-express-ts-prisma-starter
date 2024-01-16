@@ -1,10 +1,11 @@
 import { type Express, type Request, type Response } from 'express'
 
 import { StatusCodes } from 'http-status-codes'
-import { ResponseData } from '../utilities'
+import { CONSOLE, ResponseData } from '../utilities'
 import { authRouter } from './v1/authRouter'
 import { CONFIG } from '../config'
 import { middleware } from '../middleware'
+import { type UsersAccount } from '@prisma/client'
 export const appRouterv1 = async (app: Express): Promise<any> => {
   app.get(
     '/',
@@ -20,7 +21,7 @@ export const appRouterv1 = async (app: Express): Promise<any> => {
 
   app.get(
     '/api/v1',
-    async (req: Request, res: Response) => {
+    async (req: any, res: Response) => {
       const data = {
         message: `Welcome to ${CONFIG.appName} v1`
       }
@@ -32,12 +33,16 @@ export const appRouterv1 = async (app: Express): Promise<any> => {
 
   authRouter(app)
 
+  // app.use(middleware.authtentication, middleware.role.admin)
   app.get(
-    '/api/v1/testauth',
+    '/api/v1/test_auth',
     middleware.authtentication,
-    async (req: Request, res: Response) => {
+    middleware.role.admin,
+    async (req: any, res: Response) => {
+      const user = req.user as UsersAccount
+      CONSOLE.log(user)
       const data = {
-        message: 'Welcome to Tiket Papa API v1'
+        message: `Welcome ${user.username} to ${CONFIG.appName} v1`
       }
       const response = ResponseData.default
       response.data = data

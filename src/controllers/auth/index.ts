@@ -3,7 +3,7 @@ import { logoutController } from './logout'
 import { registerController } from './register'
 import { resendOTPController, verifyOTPController } from './twoFactor'
 
-export const authCOntroller = {
+export const authController = {
   login: loginComtroller,
   verifyOTP: verifyOTPController,
   resendOTP: resendOTPController,

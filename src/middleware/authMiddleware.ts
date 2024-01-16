@@ -14,26 +14,31 @@ export const userAuthorization = async (req: any, res: Response, next: NextFunct
       return res.status(StatusCodes.UNAUTHORIZED).json(response)
     }
     const tokenData = verifyAccesToken(requestCookie.token, CONFIG.secret.secretToken as string)
-    console.log(tokenData)
     if (tokenData == null) {
       const response = ResponseData.error('Missing Authorization.')
       return res.status(StatusCodes.UNAUTHORIZED).json(response)
     }
-    const result = prisma.userAccess.findFirst({
+    const result = await prisma.userAccess.findFirst({
       where: {
         accessToken: requestCookie.token
       },
       include: {
-        userAcount: true
+        userAcount: {
+          select: {
+            id: true,
+            username: true,
+            role: true,
+            email: true
+          }
+        }
       }
     })
-
-    console.log(result.userAcount())
 
     if (result === null) {
       const response = ResponseData.error('Missing Authorization.')
       return res.status(StatusCodes.UNAUTHORIZED).json(response)
     }
+    req.user = result.userAcount
     next()
   } catch (error: any) {
     CONSOLE.error(error.message)
