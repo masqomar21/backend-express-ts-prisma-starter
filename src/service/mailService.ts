@@ -1,11 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import nodemailer from 'nodemailer'
 import { CONFIG } from '../config'
 import { CONSOLE } from '../utilities'
+import type SMTPTransport from 'nodemailer/lib/smtp-transport'
+import type SESTransport from 'nodemailer/lib/ses-transport'
 
 const mailHost = CONFIG.smtp.host
 const mailPort = parseInt(CONFIG.smtp.port)
@@ -23,8 +20,8 @@ export interface MailInterface {
   html?: string
 }
 
-export default class MailSevice {
-  private static instance: MailSevice
+export default class MailService {
+  private static instance: MailService
 
   private readonly transporter: nodemailer.Transporter = nodemailer.createTransport({
     host: mailHost,
@@ -38,17 +35,17 @@ export default class MailSevice {
 
   private constructor () { }
 
-  static getInstance () {
-    if (!MailSevice.instance) {
-      MailSevice.instance = new MailSevice()
+  static getInstance (): MailService {
+    if (typeof MailService.instance === 'undefined') {
+      MailService.instance = new MailService()
     }
-    return MailSevice.instance
+    return MailService.instance
   }
 
   async sendMail (
     requestId: string | number | string[],
     options: MailInterface
-  ) {
+  ): Promise<any> {
     CONSOLE.info('sendMail from request -> ', requestId)
     await this.transporter.sendMail({
       from: `"${CONFIG.appName} team" <${options.from ?? CONFIG.smtp.sender}>`,
@@ -59,22 +56,22 @@ export default class MailSevice {
       text: options.text,
       html: options.html
     })
-      .then((info: any) => {
+      .then((info: SMTPTransport.SentMessageInfo | SESTransport.SentMessageInfo) => {
         CONSOLE.info('Message sent: %s', info.messageId)
-        CONSOLE.info(`${requestId} -> mail sent successfully`)
+        CONSOLE.info(`${requestId as string} -> mail sent successfully`)
         CONSOLE.info(`-> [Mail Response] = ${info.response} -> [Mail Message] = ${info.messageId}`)
         if (!isSecure) {
-          CONSOLE.info(`${requestId} - Nodemailer ethereal URL : ${nodemailer.getTestMessageUrl(info)}`)
+          CONSOLE.info(`${requestId as string} - Nodemailer ethereal URL : ${nodemailer.getTestMessageUrl(info)}`)
         }
         return info
       })
   }
 
-  async verifyConetion () {
+  async verifyConnection (): Promise<boolean> {
     return await this.transporter.verify()
   }
 
-  getTransporter () {
+  getTransporter (): nodemailer.Transporter {
     return this.transporter
   }
 }

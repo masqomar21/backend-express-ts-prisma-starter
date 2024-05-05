@@ -4,7 +4,7 @@ import { StatusCodes } from 'http-status-codes'
 import { CONFIG } from '../../config'
 import prisma from '../../db'
 import { otpMailVerify } from '../../templates'
-import MailSevice from '../../service/mailSevice'
+import MailService from '../../service/MailService'
 
 export const verifyOTPController = async function (req: any, res: Response): Promise<any> {
   const requestBody = req.body as { token: string, otp: string, device: string }
@@ -118,7 +118,7 @@ export const resendOTPController = async function (req: any, res: Response): Pro
 
     const mailOTP = otpMailVerify(OTP)
 
-    const mailService = MailSevice.getInstance()
+    const mailService = MailService.getInstance()
     await mailService.sendMail(result.id, {
       from: CONFIG.smtp.sender,
       to: result.email,

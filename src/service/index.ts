@@ -1,1 +1,1 @@
-export * from './mailSevice'
+export * from './mailService'
