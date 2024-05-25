@@ -6,7 +6,7 @@ import prisma from '../../db'
 import { StatusCodes } from 'http-status-codes'
 import { CONFIG } from '../../config'
 import { otpMailVerify } from '../../templates'
-import MailSevice from '../../service/mailSevice'
+import MailService from '../../service/MailService'
 
 export const loginComtroller = async function (req: any, res: Response): Promise<any> {
   const requestBody = req.body as UsersAccount
@@ -89,7 +89,7 @@ export const loginComtroller = async function (req: any, res: Response): Promise
 
     const mailOTP = otpMailVerify(OTP)
 
-    const mailService = MailSevice.getInstance()
+    const mailService = MailService.getInstance()
     void mailService.sendMail(result.id, {
       from: CONFIG.smtp.sender,
       to: result.email,

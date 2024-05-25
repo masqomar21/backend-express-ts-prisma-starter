@@ -16,7 +16,7 @@ export const CONFIG = {
     keyEncryption: process.env.SECRET_KEY_ENCRYIPTION,
     passwordEncryption: process.env.SECRET_PASSWORD_ENCRYPTION,
     secretToken: process.env.SECRET_TOKEN,
-    secreReferstToken: process.env.SECRET_REFRESS_TOKEN,
+    secreReferstToken: process.env.SECRET_REFRESH_TOKEN,
     secretOTP: process.env.SECRET_OTP
   },
   maximumUploadFile: process.env.MAXIMUM_UPLOAD_FILE || 1024,
@@ -53,8 +53,8 @@ export const CONFIG = {
     sender : process.env.SMTP_SENDER || 'no-reply@test.com',
     host: process.env.VERIFICATION_HOST || 'smtp.ethereal.email',
     port: process.env.VERIFICATION_PORT || '587',
-    email: process.env.VERIFICATION_EMIAL || 'alda.hilpert@ethereal.email',
-    password: process.env.VERIFICATION_EMIAL_PASSWORD || 'aSBRhVyCmHnVUXGtaR'
+    email: process.env.VERIFICATION_EMAIL || 'alda.hilpert@ethereal.email',
+    password: process.env.VERIFICATION_EMAIL_PASSWORD || 'aSBRhVyCmHnVUXGtaR'
   }
 }
   
